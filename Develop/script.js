@@ -4,6 +4,8 @@
 
 let now = dayjs();
 console.log(now.format());
+let savedEvents = new Array(9);
+console.log("saved array entries:", savedEvents)
 
 const timeBlock = document.querySelector("hour");
 
@@ -26,6 +28,28 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
+
+//save button function
+$("button").click(function() { 
+  let textEntry = $(this).siblings("#textEntry").val();
+  console.log(textEntry);
+  let entryTime = $(this).closest("div").attr("id");
+  console.log(entryTime);
+  // create object with keys of saved items
+  let savedEntry = {
+    time: parseInt(entryTime),
+    entry: textEntry
+  }
+console.log(savedEntry)
+  //create array index location number.
+  let arrayIndex = savedEntry.time - 9;
+  //write saved objects into array 
+  savedEvents.splice(arrayIndex, 1, savedEntry);
+  localStorage.setItem("savedEvents", JSON.stringify(savedEvents))
+
+}
+)
+
 const displayColorUpdate = () => {
   //format current time to hour and save as current time
   var currentTime = parseInt(now.format("H"));
@@ -43,9 +67,6 @@ const displayColorUpdate = () => {
     } 
     console.log("jquery target: " + "#" + i);
   } 
-
-  
-  console.log()
 }
 
 displayColorUpdate();
