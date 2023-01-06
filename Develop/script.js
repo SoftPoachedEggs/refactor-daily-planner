@@ -11,10 +11,10 @@ const timeBlock = document.querySelector("hour");
 
 console.log(timeBlock);
 
-$(function () {
-//updateTimeandDate();
-//displayTasks();
-  });
+$(document).ready(function () {
+  displayColorUpdate();
+  displaySavedSchedule();
+});
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -40,7 +40,8 @@ $("button").click(function() {
     time: parseInt(entryTime),
     entry: textEntry
   }
-console.log(savedEntry)
+  console.log(savedEntry)
+
   //create array index location number.
   let arrayIndex = savedEntry.time - 9;
   //write saved objects into array 
@@ -69,7 +70,28 @@ const displayColorUpdate = () => {
   } 
 }
 
-displayColorUpdate();
+//----load and display stored schedule functions----
+const loadSchedule = () => {
+  var savedSchedule = localStorage.getItem("savedEvents")
+  if (savedSchedule) {
+    savedEvents = JSON.parse(savedSchedule);
+  }
+  console.log("saved schedule content: ", savedSchedule)
+}
+const displaySavedSchedule = () => {
+  loadSchedule();
+  for (i = 0; i < 9; i++) {
+    let hourlyEntry = savedEvents[i];
+    let entryBox = $('#' + (i + 9));
+    if (hourlyEntry) {
+      var j = hourlyEntry.entry;
+      entryBox.val(j)
+    }
+
+    console.log('entry box: ', entryBox)
+  }
+}
+
 
 
 
