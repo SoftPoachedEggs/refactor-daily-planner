@@ -17,7 +17,7 @@ Public use for informational purposes only.
 
 ## Link
 
-[Horiseon - SEO, Online Reputation, & Social Media](https://google.com)
+[Work Day Scheduler](https://softpoachedeggs.github.io/refactor-daily-planner/)
 
 ## License
 
